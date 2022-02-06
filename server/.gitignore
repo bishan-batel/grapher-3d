@@ -1,0 +1,5 @@
+derby.log
+build/
+dist/
+3dGraphs/
+.idea/

@@ -1,0 +1,84 @@
+@import "../../colors";
+
+.graph-page {
+  #title {
+    font-size: 3rem;
+    padding: .5rem .5rem .5rem 2rem;
+    left: -1rem;
+    top: 3rem;
+    text-align: left;
+    positioN: fixed;
+    background: $frost0;
+    border-radius: $border-roundness;
+  }
+
+  .graph-select {
+    margin-top: 10rem;
+    overflow-y: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+    #graphs {
+      list-style: none;
+      text-align: center;
+
+      .graph {
+        width: 20rem;
+        padding-top: .5rem;
+        padding-bottom: .5rem;
+        font-size: 2rem;
+        border-radius: $border-roundness;
+        margin: 1rem;
+        display: flex;
+        flex-direction: column;
+
+        transition: all 200ms ease-in-out;
+
+        .delete {
+          left: .5rem;
+          top: .5rem;
+          width: 2rem;
+          height: 2rem;
+          transition: all 150ms ease-in-out;
+
+          &:hover {
+            transform: scale(1.1);
+            cursor: pointer;
+          }
+        }
+
+        &:hover {
+          transform: scale(1.1);
+          cursor: pointer;
+        }
+
+
+        @mixin color($col) {
+          background: $col;
+        }
+
+        &:nth-child(5n+1) {
+          @include color($aurora0);
+        }
+
+        &:nth-child(5n+2) {
+          @include color($aurora1);
+        }
+
+        &:nth-child(5n+3) {
+          @include color($aurora2);
+        }
+
+        &:nth-child(5n+4) {
+          @include color($aurora3);
+        }
+
+        &:nth-child(5n+5) {
+          @include color($aurora4);
+        }
+      }
+    }
+  }
+}
