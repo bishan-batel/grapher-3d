@@ -8,128 +8,153 @@ import java.util.Random;
 import static java.lang.String.format;
 
 /**
- * Wrapper to create unique hashes for a password with a salt
- * Also used to compare multiple passwords
+ * Wrapper to create unique hashes for a password with a salt Also used to
+ * compare multiple passwords
  */
-public class SaltedPassword {
-	// Constants
-	public static final String HASH_ALGORITHM = "SHA-256";
-	public static final int HASH_BIT_LENGTH = 256;
-	public static final int SALT_SIZE = 32;
+public class SaltedPassword
+{
+  // Constants
 
-	// Instance variables
-	private String hash;
-	private final String salt;
+  public static final String HASH_ALGORITHM = "SHA-256";
+  public static final int HASH_BIT_LENGTH = 256;
+  public static final int SALT_SIZE = 32;
 
-	// Constructors
-	public SaltedPassword(String password) {
-		salt = getRandomSalt();
-		setHash(password);
-	}
+  // Instance variables
+  private String hash;
+  private final String salt;
 
-	public SaltedPassword(String hash, String salt) {
-		this.salt = salt;
-		this.hash = hash;
-	}
+  // Constructors
+  public SaltedPassword(String password)
+  {
+    salt = getRandomSalt();
+    setHash(password);
+  }
 
-	@Override
-	public boolean equals(Object obj) {
-		// if other obj is null then not equal
-		if (obj == null) return false;
+  public SaltedPassword(String hash, String salt)
+  {
+    this.salt = salt;
+    this.hash = hash;
+  }
 
-		// if other object is not same type then not equal
-		if (!(obj instanceof SaltedPassword)) return false;
+  @Override
+  public boolean equals(Object obj)
+  {
+    // if other obj is null then not equal
+    if (obj == null)
+    {
+      return false;
+    }
 
-		// casts to type
-		var rhs = (SaltedPassword) obj;
+    // if other object is not same type then not equal
+    if (!(obj instanceof SaltedPassword))
+    {
+      return false;
+    }
 
-		// 2 salted passwords are equal if their calculated hashes are the same
-		return rhs.hash.equals(this.hash);
-	}
+    // casts to type
+    var rhs = (SaltedPassword) obj;
 
-	@Override
-	public String toString() {
-		return format("Hash: [%s]\nSalt: [%s]", hash, salt);
-	}
+    // 2 salted passwords are equal if their calculated hashes are the same
+    return rhs.hash.equals(this.hash);
+  }
 
-	// Setters and getters
-	public void setHash(String password) {
-		try {
-			// creates hash digester
-			MessageDigest msgDigest = MessageDigest.getInstance(HASH_ALGORITHM);
+  @Override
+  public String toString()
+  {
+    return format("Hash: [%s]\nSalt: [%s]", hash, salt);
+  }
 
-			// gets 'food' to feed into digester
-			byte[] food = (password + salt).getBytes();
+  // Setters and getters
+  public void setHash(String password)
+  {
+    try
+    {
+      // creates hash digester
+      MessageDigest msgDigest = MessageDigest.getInstance(HASH_ALGORITHM);
 
-			// hashes into byte array
-			byte[] digested = msgDigest.digest(food);
+      // gets 'food' to feed into digester
+      byte[] food = (password + salt).getBytes();
 
-			// stringifies hash to HEX
-			var hex = new StringBuilder(new BigInteger(digested)
-				.abs()
-				.toString(16)
-			);
+      // hashes into byte array
+      byte[] digested = msgDigest.digest(food);
 
-			// keeps length of string constant
-			while (hex.length() < (HASH_BIT_LENGTH / Byte.SIZE))
-				hex.insert(0, '0');
+      // stringifies hash to HEX
+      var hex = new StringBuilder(new BigInteger(digested)
+        .abs()
+        .toString(16)
+      );
 
-			// builds string
-			hash = hex.toString();
+      // keeps length of string constant
+      while (hex.length() < (HASH_BIT_LENGTH / Byte.SIZE))
+      {
+        hex.insert(0, '0');
+      }
 
-			/*
+      // builds string
+      hash = hex.toString();
+
+      /*
 			 bruh whoever made java.security made it so that when you get a digest
 			 you need to handle a 'NoSuchAlgorithmException' in case the algorithm
 			 you specify (which is a STRING)
-			 */
-		} catch (NoSuchAlgorithmException nsa) {
-			nsa.printStackTrace();
-		}
-	}
+       */
+    }
+    catch (NoSuchAlgorithmException nsa)
+    {
+      nsa.printStackTrace();
+    }
+  }
 
-	public String getHash() {
-		return hash;
-	}
+  public String getHash()
+  {
+    return hash;
+  }
 
-	public static String getRandomSalt() {
-		// Creates empty buffer for salt
-		var salt = new byte[SALT_SIZE];
+  public static String getRandomSalt()
+  {
+    // Creates empty buffer for salt
+    var salt = new byte[SALT_SIZE];
 
-		// Creates RNG
-		var rng = new Random();
+    // Creates RNG
+    var rng = new Random();
 
-		// Fills buffer with random bytes
-		rng.nextBytes(salt);
+    // Fills buffer with random bytes
+    rng.nextBytes(salt);
 
-		// converts bytes to hex
-		var hex = new StringBuilder(new BigInteger(salt)
-			.abs()
-			.toString(16)
-		);
+    // converts bytes to hex
+    var hex = new StringBuilder(new BigInteger(salt)
+      .abs()
+      .toString(16)
+    );
 
-		// pads 0's to keep length constant
-		while (hex.length() < SALT_SIZE)
-			hex.insert(0, '0');
+    // pads 0's to keep length constant
+    while (hex.length() < SALT_SIZE)
+    {
+      hex.insert(0, '0');
+    }
 
-		return hex.toString();
-	}
+    return hex.toString();
+  }
 
-	public String getSalt() {
-		return salt;
-	}
+  public String getSalt()
+  {
+    return salt;
+  }
 
-	// Tests
-	public static void main(String[] args) {
-		// test for salt
-		var salted = new SaltedPassword("password123");
-		System.out.println(salted);
+  // Tests
+  public static void main(String[] args)
+  {
+    // test for salt
+    var salted = new SaltedPassword("password123");
+    System.out.println(salted);
 
-		String salt = salted.getSalt();
+    String salt = salted.getSalt();
 
-		for (int i = 0; i < salt.length(); i++) {
-			System.out.print((byte) salt.charAt(i) + ", ");
-		}
+    for (int i = 0; i < salt.length(); i++)
+    {
+      System.out.print((byte) salt.charAt(i) + ", ");
+    }
 
-		System.out.println();
-	}
+    System.out.println();
+  }
 }

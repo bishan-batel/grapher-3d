@@ -11,126 +11,162 @@ import java.util.Map;
 
 import static java.lang.String.format;
 
-public class RequestInfo {
-	public static final String DELIMITER = ": ";
+public class RequestInfo
+{
 
-	private final HttpExchange ex;
-	private final String route;
-	private final String[] routeSections;
-	private final RequestType reqType;
-	private final OutputStream responseBody;
-	private final String sessionId;
-	// TODO ammend
-	private final String cookies;
+  public static final String DELIMITER = ": ";
 
-	public RequestInfo(HttpExchange ex) {
-		this.ex = ex;
-		route = ex.getRequestURI().getPath();
-		routeSections = route.substring(1).split("/");
+  private final HttpExchange ex;
+  private final String route;
+  private final String[] routeSections;
+  private final RequestType reqType;
+  private final OutputStream responseBody;
+  private final String sessionId;
+  // TODO ammend
+  private final String cookies;
 
-		responseBody = ex.getResponseBody();
-		cookies = ex.getRequestHeaders().getFirst("Cookie");
-		sessionId = getCookie("token");
+  public RequestInfo(HttpExchange ex)
+  {
+    this.ex = ex;
+    route = ex.getRequestURI().getPath();
+    routeSections = route.substring(1).split("/");
 
-		RequestType type;
-		try {
-			type = RequestType.valueOf(ex.getRequestMethod());
-		} catch (IllegalArgumentException e) {
-			type = RequestType.OTHER;
-		}
-		reqType = type;
-	}
+    responseBody = ex.getResponseBody();
+    String cookies = ex.getRequestHeaders().getFirst("Cookie");
+    if (cookies == null)
+    {
+      this.cookies = "";
+    }
+    else
+    {
+      this.cookies = cookies;
+    }
+    sessionId = getCookie("token");
 
-	public boolean isVerb(RequestType reqType) {
-		return this.reqType.is(ex.getRequestMethod());
-	}
+    RequestType type;
+    try
+    {
+      type = RequestType.valueOf(ex.getRequestMethod());
+    }
+    catch (IllegalArgumentException e)
+    {
+      type = RequestType.OTHER;
+    }
+    reqType = type;
+  }
 
-	@Override
-	public String toString() {
-		return format(
-			"%s Request at route \"%s\" with session of \"%s\"",
-			reqType.toString(),
-			route,
-			sessionId
-		);
-	}
+  public boolean isVerb(RequestType reqType)
+  {
+    return this.reqType.is(ex.getRequestMethod());
+  }
 
-	// Getters & Setters
-	public HttpExchange getEx() {
-		return ex;
-	}
+  @Override
+  public String toString()
+  {
+    return format(
+      "%s Request at route \"%s\" with session of \"%s\"",
+      reqType.toString(),
+      route,
+      sessionId
+    );
+  }
 
-	public String getRoute() {
-		return route;
-	}
+  // Getters & Setters
+  public HttpExchange getEx()
+  {
+    return ex;
+  }
 
-	public String[] getRouteSections() {
-		return routeSections;
-	}
+  public String getRoute()
+  {
+    return route;
+  }
 
-	public String getRouteSection(int i) {
-		try {
-			return routeSections[i];
-		} catch (Exception e) {
-			return null;
-		}
-	}
+  public String[] getRouteSections()
+  {
+    return routeSections;
+  }
 
-	public RequestType getReqType() {
-		return reqType;
-	}
+  public String getRouteSection(int i)
+  {
+    try
+    {
+      return routeSections[i];
+    }
+    catch (Exception e)
+    {
+      return null;
+    }
+  }
 
-	public OutputStream getResponseBody() {
-		return responseBody;
-	}
+  public RequestType getReqType()
+  {
+    return reqType;
+  }
 
-	public String getSessionId() {
-		return sessionId;
-	}
+  public OutputStream getResponseBody()
+  {
+    return responseBody;
+  }
 
-	public String getCookie(String name) {
-		// first half of what cookie would be
-		var nameEq = name + "=";
+  public String getSessionId()
+  {
+    return sessionId;
+  }
 
-		// splits cookiues by ;
-		String[] cookiesSplit = cookies.split(";");
+  public String getCookie(String name)
+  {
+    // first half of what cookie would be
+    var nameEq = name + "=";
 
-		// for each cookie
-		for (String cookie : cookiesSplit) {
+    // splits cookiues by ;
+    String[] cookiesSplit = cookies.split(";");
 
-			// trim whitespace
-			while (cookie.charAt(0) == ' ')
-				cookie = cookie.substring(1);
+    // for each cookie
+    for (String cookie : cookiesSplit)
+    {
 
-			// if beginning equals nameEq then return substring val
-			if (cookie.indexOf(nameEq) == 0)
-				return cookie.substring(nameEq.length());
-		}
+      // trim whitespace
+      while (cookie.charAt(0) == ' ')
+      {
+        cookie = cookie.substring(1);
+      }
 
-		// no cookie found
-		return null;
-	}
+      // if beginning equals nameEq then return substring val
+      if (cookie.indexOf(nameEq) == 0)
+      {
+        return cookie.substring(nameEq.length());
+      }
+    }
 
-	public Map<String, String> getRequestBody() throws IOException {
-		var map = new HashMap<String, String>();
-		// if request type is not YAML then assume wrong format
+    // no cookie found
+    return null;
+  }
 
+  public Map<String, String> getRequestBody() throws IOException
+  {
+    var map = new HashMap<String, String>();
+    // if request type is not YAML then assume wrong format
 
-		// gets request body as string
-		byte[] bodyBytes = ex.getRequestBody().readAllBytes();
-		var body = new String(bodyBytes, StandardCharsets.UTF_8);
+    // gets request body as string
+    byte[] bodyBytes = ex.getRequestBody().readAllBytes();
+    var body = new String(bodyBytes, StandardCharsets.UTF_8);
 
-		// for all lines in the string try to split it into key value string pairs
-		for (String line : body.split("\n")) {
+    // for all lines in the string try to split it into key value string pairs
+    for (String line : body.split("\n"))
+    {
 
-			// if line does not contain delimiter then assume wrong format
-			if (!line.contains(DELIMITER)) continue;
+      // if line does not contain delimiter then assume wrong format
+      if (!line.contains(DELIMITER))
+      {
+        continue;
+      }
 
-			// get key on left side of delimeter & put in map
-			String key = line.split(DELIMITER)[0];
-			map.put(key, line.substring(key.length() + DELIMITER.length()));
-		}
+      // get key on left side of delimeter & put in map
+      String key = line.split(DELIMITER)[0];
+      map.put(key, line.substring(key.length() + DELIMITER.length()));
+    }
 
-		return map;
-	}
+    return map;
+  }
 }

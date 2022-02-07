@@ -28,3 +28,18 @@ body {
   top: 50%;
   transform: translate(-50%, -80%);
 }
+
+#theme-switcher {
+  position: absolute;
+  left: 2rem;
+  bottom: 20rem;
+
+  width: 4rem;
+  height: 4rem;
+
+  transition: all 200ms ease-in-out;
+
+  &:active {
+    transform: scale(1.2);
+  }
+}

@@ -193,6 +193,18 @@ impl Grapher {
     }
 
     pub fn render(&mut self) {
+        // sets clear color
+        {
+            let rgb_arr = crate::theme(0);
+
+            // converts js values doubles to f32
+            let r = rgb_arr.get(0).as_f64().unwrap_throw() as f32;
+            let g = rgb_arr.get(1).as_f64().unwrap_throw() as f32;
+            let b = rgb_arr.get(2).as_f64().unwrap_throw() as f32;
+
+            self.gl.clear_color(r, g, b, 1.);
+        }
+
         // Clears screen (color & depth screen buffer)
         self.gl.clear(WebGl2RenderingContext::COLOR_BUFFER_BIT);
         self.gl.clear(WebGl2RenderingContext::DEPTH_BUFFER_BIT);

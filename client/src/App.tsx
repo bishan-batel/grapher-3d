@@ -1,7 +1,14 @@
-import React, {FC, useEffect, useRef} from "react";
+import React, {FC, useEffect, useRef, useState} from "react";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import GraphPage from "./components/graph/GraphPage";
 import AccountPage from "./components/login/AccountPage";
+
+const getStoredTheme = () => {
+    const stored = localStorage.getItem("theme");
+    if (stored === "dark") return "dark";
+    if (stored === "light") return "light";
+    return "dark"
+}
 
 /// Main Monolithic React Component
 const App: FC = () => {
@@ -28,8 +35,17 @@ const App: FC = () => {
     }, []);
 
     const [hasGl, err] = hasWebGL2();
+
+    const [theme, setTheme] = useState<"dark" | "light">(getStoredTheme());
+
+    const toggleTheme = () => {
+        const newTheme = theme === "dark" ? "light" : "dark";
+        localStorage.setItem("theme", newTheme);
+        setTheme(newTheme)
+    };
+
     return (
-        <div className="App dark">
+        <div className={"App " + theme}>
             {hasGl ?
                 <BrowserRouter>
                     <Routes>
@@ -38,7 +54,9 @@ const App: FC = () => {
                         <Route path="graphing" element={<GraphPage/>}/>
                         <Route path="account" element={<AccountPage/>}/>
                     </Routes>
-                </BrowserRouter> : <NoGl msg={err}/>}
+                </BrowserRouter> :
+                <NoGl msg={err}/>}
+            <img src="icons/brush.svg" id="theme-switcher" onClick={toggleTheme}/>
         </div>
     );
 };
@@ -49,7 +67,7 @@ const NoGl: FC<{ msg: string }> = ({msg}) => (<>
 
 const hasWebGL2 = (): [boolean, string] => {
     const gl = document.createElement('canvas').getContext('webgl2');
-    if (!gl ) {
+    if (!gl) {
         if (typeof WebGL2RenderingContext !== 'undefined') {
             return [false, 'Your browser appears to support WebGL2 but it might be disabled. Try updating your OS and/or video card drivers'];
         } else {
