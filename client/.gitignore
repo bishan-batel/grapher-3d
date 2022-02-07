@@ -4,3 +4,4 @@ src/crate-build/
 yarn.lock
 yarn-error.log
 .idea/
+build/

@@ -22,7 +22,7 @@ public class MainServer {
 	 * server computer
 	 */
 //	public static final String JS_BUILD_DIR = "/home/bishan/code/web/grapher-3d/client/build";
-	public static final String JS_BUILD_DIR = "../client/build";
+	public static final String JS_BUILD_DIR = "src/js-build";
 
 	/**
 	 * Path to javascript project's build output Needed for server to know where

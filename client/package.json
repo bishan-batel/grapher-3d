@@ -11,8 +11,6 @@
     "@types/react": "^17.0.20",
     "@types/react-dom": "^17.0.9",
     "@types/react-router-dom": "^5.3.2",
-    "asciimath-to-latex": "^0.5.1",
-    "mathjax3-react": "^1.0.12",
     "react": "^17.0.2",
     "react-app-rewired": "^2.1.11",
     "react-dom": "^17.0.2",
@@ -23,7 +21,7 @@
   },
   "scripts": {
     "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
+    "build": "react-app-rewired build && echo Build Finished",
     "test": "react-app-rewired test",
     "eject": "react-app-rewired eject"
   },
@@ -46,7 +44,6 @@
     ]
   },
   "devDependencies": {
-    "@types/react-mathjax": "^1.0.1",
     "@wasm-tool/wasm-pack-plugin": "^1.6.0",
     "sass": "^1.48.0",
     "sass-loader": "^12.4.0"

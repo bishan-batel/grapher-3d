@@ -1,5 +1,4 @@
 # Rust & Web-Sys Generated Garbage
-Cargo.lock
 target/
 .idea/
 build/

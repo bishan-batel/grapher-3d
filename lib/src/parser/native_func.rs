@@ -14,6 +14,7 @@ pub const NATIVE_FUNCTIONS: &[NativeFunc] = &[
     NativeFunc("fract", 1),
     NativeFunc("pow", 2),
     NativeFunc("exp", 1),
+    NativeFunc("sqrt", 1),
     NativeFunc("hypot", 2),
     NativeFunc("lerp", 3),
 ];
