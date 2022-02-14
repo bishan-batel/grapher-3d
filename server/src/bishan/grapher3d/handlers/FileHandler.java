@@ -13,8 +13,7 @@ import java.util.*;
 
 import static java.lang.String.format;
 
-public class FileHandler
-{
+public class FileHandler {
 
   /**
    * Key value pairs of all mime types
@@ -23,8 +22,7 @@ public class FileHandler
   public static final byte[] FNF_ERROR = "404 File Not Found".getBytes();
 
   // Static constructor to initialize types in MIME_TYPES
-  static
-  {
+  static {
     MIME_TYPES = new HashMap<>();
 
     // Adds all pairs of file extensions to their mime types
@@ -51,12 +49,11 @@ public class FileHandler
   /**
    * Creates new File Handler
    *
-   * @param main reference to main server
+   * @param main         reference to main server
    * @param publicPath
    * @param allowedFiles
    */
-  public FileHandler(MainServer main, String publicPath, String[] allowedFiles)
-  {
+  public FileHandler(MainServer main, String publicPath, String[] allowedFiles) {
     this.main = main;
     this.publicPath = publicPath;
     this.allowedFiles = allowedFiles;
@@ -67,8 +64,7 @@ public class FileHandler
    *
    * @param info Exchange info
    */
-  public void handle(RequestInfo info) throws IOException
-  {
+  public void handle(RequestInfo info) throws IOException {
     HttpExchange ex = info.getEx();
     String route = info.getRoute();
     String requestedFiletype = "txt";
@@ -76,10 +72,8 @@ public class FileHandler
     // verifies that the request file type is valid
     boolean requestFiletypeIsOK = false;
 
-    for (String fileType : allowedFiles)
-    {
-      if (route.endsWith(fileType))
-      {
+    for (String fileType : allowedFiles) {
+      if (route.endsWith(fileType)) {
         requestFiletypeIsOK = true;
         requestedFiletype = fileType;
         break;
@@ -87,8 +81,7 @@ public class FileHandler
     }
 
     // if filetype is not valid then assume request is for react-router
-    if (!requestFiletypeIsOK)
-    {
+    if (!requestFiletypeIsOK) {
       route = "/index.html";
       requestedFiletype = ".html";
     }
@@ -97,12 +90,9 @@ public class FileHandler
     URI fileURI;
 
     // Attempts to grab file URI
-    try
-    {
+    try {
       fileURI = fileURI(route);
-    }
-    catch (FileNotFoundException fnf)
-    {
+    } catch (FileNotFoundException fnf) {
       // if file does not exist reroute to index page
       route = "/index.html";
       requestedFiletype = ".html";
@@ -114,27 +104,22 @@ public class FileHandler
 
     // Mime type header to tell client what file type
     ex.getResponseHeaders().add(
-      "Content-Type",
-      MIME_TYPES.get(requestedFiletype)
-    );
+        "Content-Type",
+        MIME_TYPES.get(requestedFiletype));
 
     // Tell browser to display inline
     ex.getResponseHeaders().add(
-      "Content-Disposition",
-      "inline; filename=" + file.getName()
-    );
+        "Content-Disposition",
+        "inline; filename=" + file.getName());
 
     // Send respoonse headers
     ex.sendResponseHeaders(200, buffer.length);
 
     // Prepare to write bytes to response
-    try ( OutputStream os = info.getResponseBody())
-    {
+    try (OutputStream os = info.getResponseBody()) {
       // writes file bytes buffer as response
       os.write(buffer);
-    }
-    catch (IOException e)
-    {
+    } catch (IOException e) {
       // print IO exception if failed, this should not happen unless the client
       // or server had an internet connection error
       e.printStackTrace();
@@ -147,8 +132,7 @@ public class FileHandler
    * @param path relative path to file on server
    * @return URI from file
    */
-  public URI fileURI(String path) throws FileNotFoundException
-  {
+  public URI fileURI(String path) throws FileNotFoundException {
     // gets full path & URI to file on server
     String fileRelativePath = publicPath + path;
     URI fileURI = Paths.get(fileRelativePath).toUri();
@@ -156,8 +140,7 @@ public class FileHandler
     // Creates file object to URI
     // If file does not exist or cannot read then throw error
     var file = new File(fileURI);
-    if (!file.exists() || !file.canRead())
-    {
+    if (!file.exists() || !file.canRead()) {
       throw new FileNotFoundException(format("File '%s' does not exist.", fileURI));
     }
 
@@ -166,18 +149,15 @@ public class FileHandler
   }
 
   // Accessors & Mutators
-  public MainServer getMain()
-  {
+  public MainServer getMain() {
     return main;
   }
 
-  public String getPublicPath()
-  {
+  public String getPublicPath() {
     return publicPath;
   }
 
-  public String[] getAllowedFiles()
-  {
+  public String[] getAllowedFiles() {
     return allowedFiles;
   }
 }

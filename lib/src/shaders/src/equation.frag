@@ -33,7 +33,7 @@ float sigmoid(float x) {
 }
 
 // clamps sigmoid between min & max
-float sigmoid_clamp(float x, float minimum, float maximum) {
+float sigmoidClamp(float x, float minimum, float maximum) {
   return minimum + sigmoid(x) * (maximum - minimum);
 }
 
@@ -46,7 +46,7 @@ void main() {
   float cosAngle = dot(normalize(v_Normal), toLight);
 
   // sigmoid clamp to prevent full darkness areas 
-  cosAngle = sigmoid_clamp(cosAngle, MIN_LIGHT, MAX_LIGHT);
+  cosAngle = sigmoidClamp(cosAngle, MIN_LIGHT, MAX_LIGHT);
 
   // Scale the color of this fragment based on its angle to the light.
 

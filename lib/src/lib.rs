@@ -1,9 +1,9 @@
 mod grapher;
 mod math;
 mod parser;
+mod render;
 mod shaders;
 mod utils;
-mod render;
 
 #[cfg(test)]
 mod tests;
@@ -13,6 +13,7 @@ use js_sys::Array;
 use utils::window;
 use wasm_bindgen::prelude::*;
 use wasm_bindgen::JsCast;
+use web_sys::Document;
 use web_sys::HtmlCanvasElement;
 
 #[cfg(feature = "wee_alloc")]
@@ -39,8 +40,18 @@ pub fn canvas_init(id: &str) -> Grapher {
 
     log(format!("Getting {}", id).as_str());
 
+    {
+        let a: i32 = 420;
+        let ptr: *const i32 = 420 as *const i32;
+
+        unsafe {
+            let b = *ptr;
+            println!("{}", b);
+        }
+    }
     // gets HTML canvas reference
     let document = window().document().unwrap_throw();
+
     let canvas = document
         .query_selector(id)
         .unwrap_throw()

@@ -19,10 +19,8 @@ pub const NATIVE_FUNCTIONS: &[NativeFunc] = &[
     NativeFunc("lerp", 3),
 ];
 
-
 impl NativeFunc {
     pub fn is_native(func: &(String, usize)) -> bool {
-        
         // checks for matches with list of native functions
         for native in NATIVE_FUNCTIONS.iter() {
             let same_name = native.0 == func.0;

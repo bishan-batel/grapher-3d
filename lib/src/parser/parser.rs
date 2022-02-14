@@ -346,7 +346,7 @@ impl Parser {
                 for arg in func_args.iter() {
                     args.push(arg.clone());
                 }
-            },
+            }
             _ => panic!("Input is not a function define"),
         }
 

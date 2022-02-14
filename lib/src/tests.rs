@@ -27,6 +27,15 @@ pub fn mat4() {
 }
 
 #[test]
+pub fn vec3() {
+    let v1 = Vec3(0., 1., 0.);
+    let v2 = Vec3(1., 2., 0.);
+
+    let v3 = v1 + v2;
+    println!("{:?}", v3);
+}
+
+#[test]
 pub fn parser() {
     println!("::Parser Test::");
 
@@ -34,6 +43,7 @@ pub fn parser() {
         f(x, y) = 2 * x + g(x)
     "#;
 
+    
     println!("::Tokenizing::");
     let toks = Lexer::new(INPUT_PARSE.into()).tokenize();
 

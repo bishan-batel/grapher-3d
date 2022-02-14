@@ -1,7 +1,8 @@
 # Used to build & test rust-wasm package
 
-OUT_DIR="../client/src/crate-build"
-TARGET="web"
+JS_DIR=../client
+OUT_DIR=$(JS_DIR)/src/crate-build
+TARGET=web
 
 # Javascript package manager
 JS_PACMAN=yarn
@@ -29,9 +30,7 @@ test:
 
 
 web:
-	cd ..
-	BROWSER=NONE $(JS_PACMAN) start
+	cd $(JS_DIR) && BROWSER=NONE $(JS_PACMAN) start
 
 web-browser:
-	cd ..
-	$(JS_PACMAN) start
+	cd $(JS_DIR) && $(JS_PACMAN) start

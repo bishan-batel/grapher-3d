@@ -22,8 +22,9 @@ public class MainServer
    * TODO Change this to whatever the build output of javascript is on the
    * server computer
    */
-//   public static final String JS_BUILD_DIR = "/home/bishan/code/web/grapher-3d/client/build";
-	public static final String JS_BUILD_DIR = "src/js-build";
+  // public static final String JS_BUILD_DIR =
+  // "/home/bishan/code/web/grapher-3d/client/build";
+  public static final String JS_BUILD_DIR = "src/js-build";
 
   /**
    * Path to javascript project's build output Needed for server to know where
@@ -69,18 +70,20 @@ public class MainServer
   {
     System.out.println("Starting server. . .");
 
-//		 Create HTTP Server
+    // Create HTTP Server
     server = HttpServer.create(new InetSocketAddress(PORT), 0);
 
-//		 Add context for '/' (all routes) to handle method
+    // Add context for '/' (all routes) to handle method
     server.createContext("/", ex ->
     {
+      // attempts to handle HTTPExchange
       try
       {
         handle(ex);
       }
       catch (Exception e)
       {
+        // logs error to stderr (if any)
         e.printStackTrace();
       }
     });
@@ -88,13 +91,12 @@ public class MainServer
     // Sets thread pool for execution
     server.setExecutor(Executors.newFixedThreadPool(5));
 
-//		Start Server
+    // Start Server
     server.start();
 
     System.out.printf(
       "Server started on http://localhost:%d %n",
-      server.getAddress().getPort()
-    );
+      server.getAddress().getPort());
   }
 
   /**

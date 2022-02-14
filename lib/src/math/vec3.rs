@@ -8,6 +8,7 @@ impl Vec3 {
     pub const LENGTH: usize = 3;
     pub const UP: Vec3 = Vec3(0., 1., 0.);
     pub const ONE: Vec3 = Vec3(1., 1., 1.);
+    pub const ZERO: Vec3 = Vec3(0., 0., 0.);
 
     pub fn new(x: f32, y: f32, z: f32) -> Self {
         Self(x, y, z)

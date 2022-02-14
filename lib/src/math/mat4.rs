@@ -65,6 +65,8 @@ impl Mat4 {
     pub fn rotate_x(&mut self, by: f32) {
         // creates rotator matrix
         let mut rotator = Mat4::IDENTITY.clone();
+        
+        rotator.rotate_x(10.);
         rotator.set(1, 1, by.cos());
         rotator.set(2, 2, by.cos());
         rotator.set(2, 1, -by.sin());

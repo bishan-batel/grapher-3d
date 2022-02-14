@@ -119,6 +119,11 @@ public class RequestInfo
     // first half of what cookie would be
     var nameEq = name + "=";
 
+    if ("".equals(cookies))
+    {
+      return null;
+    }
+
     // splits cookiues by ;
     String[] cookiesSplit = cookies.split(";");
 
