@@ -4,7 +4,7 @@ use wasm_bindgen::JsValue;
 use crate::parser::Operator;
 
 use super::{
-    native_func::{NativeFunc, NATIVE_FUNCTIONS},
+    native::{NativeFunc, NATIVE_FUNCTIONS},
     ParseNode, ParserError, Token,
 };
 

@@ -38,17 +38,6 @@ extern "C" {
 pub fn canvas_init(id: &str) -> Grapher {
     set_panic_hook();
 
-    log(format!("Getting {}", id).as_str());
-
-    {
-        let a: i32 = 420;
-        let ptr: *const i32 = 420 as *const i32;
-
-        unsafe {
-            let b = *ptr;
-            println!("{}", b);
-        }
-    }
     // gets HTML canvas reference
     let document = window().document().unwrap_throw();
 

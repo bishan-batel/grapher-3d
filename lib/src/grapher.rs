@@ -209,11 +209,14 @@ impl Grapher {
         self.gl.clear(WebGl2RenderingContext::COLOR_BUFFER_BIT);
         self.gl.clear(WebGl2RenderingContext::DEPTH_BUFFER_BIT);
 
+
+
         // camera position to use for lookAt matrix & lighting calculations
         // inside fragment shader
         let cam_pos = Vec3::new(0., 0., -CAM_ZOOM_OUT);
 
         // Matrix Calculations ------------------------------------------------
+
 
         // World matrix for all graphs
         let mut m_world = Mat4::IDENTITY.clone();
@@ -227,6 +230,7 @@ impl Grapher {
             m_view.look_at(cam_pos, Vec3::new(0., 0., 0.), Vec3::UP);
             m_view
         };
+
 
         // Projection matrix for all graphs
         let m_proj = {
@@ -278,6 +282,7 @@ impl Grapher {
 
         let uni_loc =
             |eq: &GraphEquation, name: &str| self.gl.get_uniform_location(&eq.program, name);
+
 
         for equation in self.equations.iter() {
             // tell gl state machine to use the equation program
