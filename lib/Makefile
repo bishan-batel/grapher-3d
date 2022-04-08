@@ -5,7 +5,7 @@ OUT_DIR=$(JS_DIR)/src/crate-build
 TARGET=web
 
 # Javascript package manager
-JS_PACMAN=yarn
+JS_PACMAN=npm
 
 # Var that filters out args of makefile
 args = `arg="$(filter-out $@,$(MAKECMDGOALS))" && echo $${arg:-${1}}`
@@ -34,3 +34,6 @@ web:
 
 web-browser:
 	cd $(JS_DIR) && $(JS_PACMAN) start
+
+build:
+	cd $(JS_DIR) && yarn build

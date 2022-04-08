@@ -85,6 +85,7 @@ const CanvasGraph: FC = () => {
             grapher.set_viewport();
         };
 
+        
         setGrapher(grapher);
 
         // Effect depends on canvas element as well as WASM crate

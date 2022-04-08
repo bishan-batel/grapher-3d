@@ -1,7 +1,7 @@
 // Module Definitions ---------------------------------------------------------
 pub mod lexer;
 pub mod parser;
-pub mod native_func;
+pub mod native;
 
 use std::fmt::{Display, Write};
 

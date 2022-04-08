@@ -109,6 +109,14 @@ float time() {
     return TIME;
 }
 
+float round(float a) {
+    if (fract(a) >= 0.5) {
+        return ceil(a);
+    } else {
+        return floor(a);
+    }
+}
+
 // used to trick glsl optimizer
 
 $EXTERN_FUNCTIONS$ 
@@ -118,6 +126,7 @@ vec3 func(vec2 pos) {
     float y = pos.y;
     float z;
 
+#define t TIME
 
     // template $$ replaced in rust
     if(oldToNew < 1.) {
