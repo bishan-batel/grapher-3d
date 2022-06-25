@@ -29,9 +29,8 @@ efficiently, in where you have ea single file (the 'Dockerfile') that describes
 the enviorment the server needs to run (ex. Ubuntu with JDK 17). The java portion
 of my program does not need Docker, as all you need is Netbeans & JDK 11, but
 because of the tools I used to build the website (Rust, Typescript, NodeJs, and
-Web-Sys) it is easier for both you (The Don), as well as the ~~idiots~~
-respectful IB moderators ( :] ) to only have to download Docker to get these
-dependicies to run the program rather than managing downloading these other things.
+Web-Sys) it is easier for both you to only have to download Docker to get these
+dependicies to run the program rather than managing downloading these other things (also allows for easier cleanup because once your done all you need to do is uninstall docker and not 50 other things).
 
 > <https://docs.docker.com/desktop/mac/install/>
 
