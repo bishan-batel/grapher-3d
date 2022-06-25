@@ -1,7 +1,7 @@
 /**
  * WORK IN PROGRESS
  */
-import {sessionTok} from "./auth";
+import { sessionTok } from "./auth";
 
 interface RequestArgs {
     method: "post" | "put" | "get" | "delete";

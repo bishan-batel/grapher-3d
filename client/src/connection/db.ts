@@ -1,6 +1,6 @@
-import {GraphData} from "../types/graph";
-import {apiFetch} from "./conn";
-import {User} from "./auth";
+import { GraphData } from "../types/graph";
+import { apiFetch } from "./conn";
+import { User } from "./auth";
 
 export const deleteGraph = async (name: string): Promise<void> => {
     const response = await apiFetch("delete", {

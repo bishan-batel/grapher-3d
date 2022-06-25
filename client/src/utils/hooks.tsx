@@ -1,23 +1,22 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 
 // @ts-ignore
-export type Crate = typeof import('../crate-build');
+export type Crate = typeof import("../crate-build");
 
 export const useCrate = (): Crate | null => {
-    const [mod, setMod] = useState<Crate | null>(null);
+  const [mod, setMod] = useState<Crate | null>(null);
 
-    useEffect(() => {
-        (async () => {
+  useEffect(() => {
+    (async () => {
+      // Imports module
+      const mod = await import("../crate-build/");
 
-            // Imports module
-            const mod = await import('../crate-build/');
+      // Calls default to load the WASM binary
+      await mod.default();
+      // Updates hook
+      setMod(mod);
+    })();
+  }, []);
 
-            // Calls default to load the WASM binary
-            await mod.default();
-            // Updates hook
-            setMod(mod);
-        })();
-    }, []);
-
-    return mod;
-}
+  return mod;
+};

@@ -1,7 +1,7 @@
 // TODO document
 
-import {useEffect, useState} from "react";
-import {authFetch} from "./conn";
+import { useEffect, useState } from "react";
+import { authFetch } from "./conn";
 
 let globalUser: User | null = null;
 
@@ -35,7 +35,7 @@ export const login = async (email: string, password: string): Promise<string> =>
             let tok = await response.text();
             document.cookie = "token=" + tok;
             console.log(sessionTok())
-            dispatchAuthChange({email});
+            dispatchAuthChange({ email });
             return "Successful"
         case 401:
             return "Invalid Password";
@@ -64,7 +64,7 @@ export const register = async (email: string, password: string): Promise<string>
             let tok = await response.text();
             document.cookie = "token=" + tok;
             console.log(sessionTok())
-            dispatchAuthChange({email});
+            dispatchAuthChange({ email });
             return "Successful"
         case 409:
             throw new Error("Duplicate username")
@@ -119,7 +119,7 @@ export const useAuth = () => {
 export const dispatchAuthChange = (user: User | null) => {
     globalUser = user;
     window.dispatchEvent(
-        new CustomEvent<AuthChange>("authChange", {detail: {user}})
+        new CustomEvent<AuthChange>("authChange", { detail: { user } })
     );
 }
 
