@@ -1,4 +1,4 @@
-import React, {Dispatch, FC, SetStateAction, useEffect, useState} from "react";
+import  {Dispatch, FC, SetStateAction, useEffect, useState} from "react";
 import {GraphData} from "../../types/graph";
 import {useAuth} from "../../connection/auth";
 import {createGraph, deleteGraph, retrieveGraph, retrieveGraphNames} from "../../connection/db";

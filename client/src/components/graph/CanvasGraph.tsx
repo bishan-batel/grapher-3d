@@ -2,8 +2,6 @@ import {FC, useContext, useEffect, useRef, useState} from "react";
 import {CrateContext, GraphDataContext} from "./GraphPage";
 import {Crate} from "../../utils/hooks";
 import {GlobalGrapher} from "../../crate-build";
-import {GraphData} from "../../types/graph";
-import graphSidePanel from "./GraphSidePanel";
 
 const PAN_SENSITIVITY = 0.01;
 const ZOOM_SENSITIVITY = 0.01;
