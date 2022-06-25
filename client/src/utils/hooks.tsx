@@ -10,7 +10,7 @@ export const useCrate = (): Crate | null => {
         (async () => {
 
             // Imports module
-            let mod = await import('../crate-build/');
+            const mod = await import('../crate-build/');
 
             // Calls default to load the WASM binary
             await mod.default();

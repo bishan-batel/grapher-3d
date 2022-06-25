@@ -15,7 +15,7 @@ import {useCrate, Crate} from "../../utils/hooks";
 import GraphSidePanel from "./GraphSidePanel";
 import {useAuth, validateLogin} from "../../connection/auth";
 import {createGraph, retrieveGraph, retrieveGraphNames} from "../../connection/db";
-import GraphSelectScreen from "./GrapahSelect";
+import GraphSelectScreen from "./GraphSelect";
 
 // TODO document
 const RESTRICTED_CHARACTERS = "\b\n\"':".split("");
