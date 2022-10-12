@@ -1,7 +1,7 @@
 #  JS Garbage
 node_modules/
 src/crate-build/
-yarn.lock
-yarn-error.log
+*.log
 .idea/
-build/
+.vscode/
+dist/
