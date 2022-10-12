@@ -177,11 +177,6 @@ impl Lexer {
         self.index += 1;
     }
 
-    // moves index back by 1
-    fn regress(&mut self) {
-        self.index -= 1;
-    }
-
     /// Grabs character that index lies on
     fn curr_char(&mut self) -> Option<char> {
         self.src.chars().nth(self.index)

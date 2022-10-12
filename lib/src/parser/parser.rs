@@ -1,10 +1,9 @@
-use js_sys::SyntaxError;
 use wasm_bindgen::JsValue;
 
 use crate::parser::Operator;
 
 use super::{
-    native::{NativeFunc, NATIVE_FUNCTIONS},
+    native::{NativeFunc},
     ParseNode, ParserError, Token,
 };
 

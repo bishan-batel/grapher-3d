@@ -118,8 +118,7 @@ float round(float a) {
 }
 
 // used to trick glsl optimizer
-
-$EXTERN_FUNCTIONS$ 
+$EXTERN_FUNCTIONS$
 
 vec3 func(vec2 pos) {
     float x = pos.x;

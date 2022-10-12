@@ -36,6 +36,8 @@ pub const NATIVE_FUNCTIONS: &[NativeFunc] = &[
 
 pub struct NativeConstant(pub &'static str, pub f32); 
 
+impl NativeConstant {}
+
 pub struct NativeFunc(pub &'static str, pub usize);
 impl NativeFunc {
     pub fn is_native(func: &(String, usize)) -> bool {

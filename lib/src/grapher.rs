@@ -8,7 +8,7 @@
 use js_sys::{Array, Date, Float32Array, Uint32Array};
 use wasm_bindgen::{prelude::*, throw_str, JsCast};
 use web_sys::{
-    HtmlCanvasElement, WebGl2RenderingContext, WebGlBuffer, WebGlProgram, WebGlVertexArrayObject,
+    HtmlCanvasElement, WebGl2RenderingContext, WebGlVertexArrayObject,
 };
 
 use crate::{
@@ -18,7 +18,6 @@ use crate::{
         vec3::Vec3,
     },
     render::{
-        glutils::{compile_shader, link_program},
         grid::Grid,
     },
     shaders::shader_generator::ShaderGenerator,

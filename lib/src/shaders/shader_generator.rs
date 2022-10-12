@@ -1,5 +1,3 @@
-use crate::math::vec3::Vec3;
-
 pub struct ShaderGenerator {}
 
 impl ShaderGenerator {

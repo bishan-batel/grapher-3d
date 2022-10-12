@@ -13,7 +13,6 @@ use js_sys::Array;
 use utils::window;
 use wasm_bindgen::prelude::*;
 use wasm_bindgen::JsCast;
-use web_sys::Document;
 use web_sys::HtmlCanvasElement;
 
 #[cfg(feature = "wee_alloc")]

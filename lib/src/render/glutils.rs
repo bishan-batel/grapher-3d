@@ -1,4 +1,3 @@
-use wasm_bindgen::prelude::*;
 use web_sys::{WebGlProgram, WebGl2RenderingContext, WebGlShader};
 
 pub fn compile_shader(

@@ -6,6 +6,7 @@ pub mod native;
 use std::fmt::{Display, Write};
 
 #[derive(Debug, Clone)]
+#[allow(unused)]
 pub enum ParserError {
     SyntaxError(String),
     RecursiveCall(String),
@@ -14,6 +15,7 @@ pub enum ParserError {
 // Enumerations for use in Parsing -----------------------------------------
 
 #[derive(Clone)]
+#[allow(unused)]
 pub enum ParseNode {
     Factor(f32),
     Identifier(String),

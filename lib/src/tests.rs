@@ -1,7 +1,7 @@
 /**
  * Testing Module, not for production
  */
-use crate::math::mat4::{self, Mat4};
+use crate::math::mat4::{Mat4};
 use crate::math::vec3::Vec3;
 /// Module to contain unit tests for projectss
 use crate::parser::lexer::Lexer;

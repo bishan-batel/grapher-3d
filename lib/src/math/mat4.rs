@@ -1,7 +1,5 @@
 use core::fmt;
-use std::ops::{self, Add, Mul, Sub};
-
-use js_sys::Math;
+use std::ops::{Add, Mul, Sub};
 
 use super::vec3::Vec3;
 
@@ -19,6 +17,7 @@ pub struct Transform {
 #[derive(Clone, Copy)]
 pub struct Mat4(pub [f32; MAT4_BUFF_LENGTH]);
 
+#[allow(unused)]
 impl Mat4 {
     pub const IDENTITY: Mat4 = Mat4([
         1., 0., 0., 0., // R1

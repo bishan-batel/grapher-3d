@@ -1,9 +1,12 @@
-use std::{ops::{Add, Div, Mul, Sub}, fmt::{Debug, Write}};
+use std::{
+    fmt::Debug,
+    ops::{Add, Div, Mul, Sub},
+};
 
 #[derive(Clone, Copy)]
 pub struct Vec3(pub f32, pub f32, pub f32);
 
-// TODO implement functions from Criterion B
+#[allow(unused)]
 impl Vec3 {
     pub const UP: Vec3 = Vec3(0., 1., 0.);
 
@@ -11,13 +14,12 @@ impl Vec3 {
         Self(x, y, z)
     }
 
-    // TODO add ammendment to Criterion B
     pub fn normalized(&self) -> Vec3 {
         return self.clone() / self.length();
     }
 
     pub fn dot(&self, rhs: Vec3) -> f32 {
-        self.0 * rhs.0 + self.1 * rhs.1 + self.2 * rhs.2 
+        self.0 * rhs.0 + self.1 * rhs.1 + self.2 * rhs.2
     }
 
     pub fn length(&self) -> f32 {
@@ -101,7 +103,7 @@ impl Mul<Vec3> for Vec3 {
 
 impl Debug for Vec3 {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("({}, {}, {})", self.0, self.1, self.2))    
+        f.write_fmt(format_args!("({}, {}, {})", self.0, self.1, self.2))
     }
 }
 

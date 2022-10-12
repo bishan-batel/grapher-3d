@@ -1,6 +1,6 @@
-use js_sys::{Float32Array, Uint16Array, Uint32Array};
+use js_sys::{Float32Array, Uint32Array};
 use wasm_bindgen::{JsValue, UnwrapThrowExt};
-use web_sys::{WebGl2RenderingContext, WebGlBuffer, WebGlProgram, WebGlVertexArrayObject};
+use web_sys::{WebGl2RenderingContext, WebGlProgram, WebGlVertexArrayObject};
 
 use crate::{
     math::mat4::{Mat4, Transform},
