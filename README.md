@@ -1,4 +1,5 @@
 # Grapher 3D
+![](https://cdn.discordapp.com/attachments/750477137320083498/1092673009963257856/image.png)
 
 This is my IB Computer Science HL IA (Internal Assessment), a 3D graphing program. There are 3 major sections of this codebase, with one being meant for a server. There is a live demo of this website in action at [https://grapher-3d.web.app](https://grapher-3d.web.app). Keep in note, account functionality is broken on the demo as I do not have the resources to host the server section of the app.
 
